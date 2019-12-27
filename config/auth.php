@@ -42,7 +42,7 @@ return [
         ],
 
         'api' => [
-            'driver' => 'eloquent',
+            'driver' => 'session',
             'provider' => 'users',
             'hash' => false,
         ],
