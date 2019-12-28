@@ -4,21 +4,21 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\JoinNow;
-use App\Http\Resources\Frontend\JoinNowResource;
-use App\Http\Requests\Frontend\JoinNowRequest;
-use App\Services\JoinNowService;
+use App\Models\Contactus;
+use App\Http\Resources\Frontend\ContactusResource;
+use App\Http\Requests\Frontend\ContactusRequest;
+use App\Services\ContactusService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use DB;
 
-class JoinNowController extends Controller
+class ContactusController extends Controller
 {
 
-    protected $JoinNowService;
+    protected $ContactusService;
 
-    public function __construct(JoinNowService $JoinNowService)
+    public function __construct(ContactusService $ContactusService)
     {
-        $this->JoinNowService = $JoinNowService;
+        $this->ContactusService = $ContactusService;
     }
 
     /**
@@ -29,8 +29,8 @@ class JoinNowController extends Controller
     public function index()
     {
         try {
-            $data = $this->JoinNowService->index();
-            return JoinNowResource::collection($data);
+            $data = $this->ContactusService->index();
+            return ContactusResource::collection($data);
         } catch (\Exception $ex) {
             return response()->json(['message' => $ex->getMessage()], 500);
         }
@@ -42,14 +42,14 @@ class JoinNowController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(JoinNowRequest $request)
+    public function store(ContactusRequest $request)
     {
         $validated = $request->validated();
         DB::beginTransaction();
         try {
-            $patient = $this->JoinNowService->store($validated);
+            $patient = $this->ContactusService->store($validated);
             DB::commit();
-            return response()->json(['message' => 'Join Now Created'], 201);
+            return response()->json(['message' => 'Contact Us Created'], 201);
         } catch (\Exception $ex) {
             DB::rollback();
             return response()->json(['message' => $ex->getMessage()], 500);

@@ -4,23 +4,12 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\JoinNow;
-use App\Http\Resources\Frontend\JoinNowResource;
-use App\Http\Requests\Frontend\JoinNowRequest;
-use App\Services\JoinNowService;
+use App\Models\Country;
+use App\Http\Resources\Frontend\CountryResource;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use DB;
 
-class JoinNowController extends Controller
+class CountryController extends Controller
 {
-
-    protected $JoinNowService;
-
-    public function __construct(JoinNowService $JoinNowService)
-    {
-        $this->JoinNowService = $JoinNowService;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -29,8 +18,8 @@ class JoinNowController extends Controller
     public function index()
     {
         try {
-            $data = $this->JoinNowService->index();
-            return JoinNowResource::collection($data);
+            $data = Country::get();
+            return response()->json(new CountryResource($data),200);
         } catch (\Exception $ex) {
             return response()->json(['message' => $ex->getMessage()], 500);
         }
@@ -42,18 +31,9 @@ class JoinNowController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(JoinNowRequest $request)
+    public function store(Request $request)
     {
-        $validated = $request->validated();
-        DB::beginTransaction();
-        try {
-            $patient = $this->JoinNowService->store($validated);
-            DB::commit();
-            return response()->json(['message' => 'Join Now Created'], 201);
-        } catch (\Exception $ex) {
-            DB::rollback();
-            return response()->json(['message' => $ex->getMessage()], 500);
-        }
+        //
     }
 
     /**
@@ -64,7 +44,14 @@ class JoinNowController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $data = Country::findOrFail($id);
+            return response()->json(new CountryResource($data),200);
+        } catch (ModelNotFoundException $ex) {
+            return response()->json(['message' => 'Unable to find requested Country!'], 404);
+        } catch (\Exception $ex) {
+            return response()->json(['message' => $ex->getMessage()], 500);
+        }
     }
 
     /**
