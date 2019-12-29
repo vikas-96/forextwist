@@ -19,16 +19,17 @@ class CreateUsersTable extends Migration
             $table->string('lastname',30);
             $table->string('email')->unique();
             $table->longText('password');
-
             $table->string('contact',20);
-            $table->string('dob');
-            $table->integer('country');
-            $table->integer('state');
-            $table->integer('city');
-            $table->string('pincode',10);
-            $table->longText('address');
-            $table->string('email_verified')->default('no');
+
+            $table->date('dob')->nullable();
+            $table->integer('country')->nullable();
+            $table->integer('state')->nullable();
+            $table->string('city')->nullable();
+            $table->string('pincode',8)->nullable();
+            $table->longText('address')->nullable();
+            $table->string('email_verified')->default('no')->nullable();
             $table->string('status')->default('active');
+            $table->integer('deleted_at')->nullable();
             $table->timestamps();
         });
     }

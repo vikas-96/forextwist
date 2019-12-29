@@ -23,23 +23,23 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        $emailValidation = 'sometimes|required|email|unique:users,email';
+        $emailValidation = 'required|email|unique:users,email';
         if ($this->method() == 'PUT' || $this->method() == 'PATCH') {
-            // $id = $this->route()->parameter('borrower');
-            $emailValidation = 'sometimes|required|email|unique:users,email,' . $this->borrower . ',id';
+            $emailValidation = 'required|email|unique:users,email,' . $this->user . ',id';
         }
         return [
-            'firstname' => 'sometimes|required|regex:/^[a-z\d\.-_\s]+$/i',
-            'lastname' => 'sometimes|required|regex:/^[a-z\d\.-_\s]+$/i',
+            'firstname' => 'required|regex:/^[a-z\d\.-_\s]+$/i',
+            'lastname' => 'required|regex:/^[a-z\d\.-_\s]+$/i',
             'email' => $emailValidation,
-            'password' => 'sometimes|required',
-            'contact' => 'sometimes|required|numeric',
+            'password' => 'required',
+            'contact' => 'required|numeric',
             'dob' => 'sometimes|required|date:YYYY-MM-DD|before:today',
             'country' => 'sometimes|required',
             'state' => 'sometimes|required',
             'city' => 'sometimes|required',
             'pincode' => 'sometimes|required|min:5',
-            'address' => 'sometimes|required'
+            'address' => 'sometimes|required',
+            'status' => 'sometimes|required'
         ];
     }
 }

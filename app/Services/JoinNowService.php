@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\JoinNow;
 use Exception;
-use DB;
 
 class JoinNowService
 {

@@ -21,6 +21,7 @@ Route::namespace('Frontend')->group(function () {
     Route::apiResource('countries', 'CountryController');
     Route::apiResource('join_now', 'JoinNowController');
     Route::apiResource('contactus', 'ContactusController');
+    Route::apiResource('users', 'UserController');
 });
 
 // Route::namespace('Admin')->prefix('admin/v1')->group(function () {
