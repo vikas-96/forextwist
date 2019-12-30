@@ -12,6 +12,7 @@ use App\Http\Requests\Frontend\ChangePasswordRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Carbon\Carbon;
+use App\Events\UsersResetPassword;
 
 class AuthController extends Controller
 {
@@ -93,7 +94,7 @@ class AuthController extends Controller
             }
 
             if (!empty($userDetails->email)) {
-                // event(new UsersResetPassword($userDetails));
+                event(new UsersResetPassword($userDetails));
 
                 return response()->json([
                     'message' => 'We have e-mailed your password reset link!',
