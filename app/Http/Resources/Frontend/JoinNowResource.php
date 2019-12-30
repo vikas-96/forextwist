@@ -20,7 +20,7 @@ class JoinNowResource extends JsonResource
             'email' => $this->email,
             'country' => $this->getCountry->name,
             'contact' => $this->contact,
-            'created_at' => $this->created_at->toDateTime()->format('d/m/Y H:i:s'),
+            'created_at' => $this->created_at->format('d/m/Y H:i:s'),
         ];
     }
 }

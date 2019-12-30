@@ -31,7 +31,7 @@ class UserRequest extends FormRequest
             'firstname' => 'required|regex:/^[a-z\d\.-_\s]+$/i',
             'lastname' => 'required|regex:/^[a-z\d\.-_\s]+$/i',
             'email' => $emailValidation,
-            'password' => 'required',
+            'password' => 'sometimes|required|string|confirmed',
             'contact' => 'required|numeric',
             'dob' => 'sometimes|required|date:YYYY-MM-DD|before:today',
             'country' => 'sometimes|required',
