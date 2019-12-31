@@ -19,7 +19,7 @@ class CountryController extends Controller
     {
         try {
             $data = Country::get();
-            return response()->json(new CountryResource($data),200);
+            return CountryResource::collection($data);
         } catch (\Exception $ex) {
             return response()->json(['message' => $ex->getMessage()], 500);
         }

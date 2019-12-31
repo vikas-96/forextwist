@@ -21,6 +21,9 @@ Route::namespace('Frontend')->group(function () {
     Route::post('login',"AuthController@login")->name('login');
     Route::post('forget_password',"AuthController@forgetPassword")->name('forget_password');
     Route::post('reset_password',"AuthController@resetPassword")->name('reset_password');
+    Route::get('email_verify',"AuthController@emailVerification")->name('email_verify');
+    Route::get('get_state_by_country/{id}', 'StateController@getStateBasedOnCountry')->name('get_state_by_country');
+    Route::get('states/{id}', 'StateController@show')->name('states');
     Route::apiResource('countries', 'CountryController');
     Route::apiResource('join_now', 'JoinNowController');
     Route::apiResource('contactus', 'ContactusController');

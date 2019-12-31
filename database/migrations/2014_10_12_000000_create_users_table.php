@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->string('email_verified')->default('no')->nullable();
             $table->string('status')->default('active');
             $table->integer('deleted_at')->nullable();
+            $table->string('email_verification_token')->nullable();
             $table->timestamps();
         });
     }

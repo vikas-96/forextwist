@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
+use App\Models\PasswordReset;
 use Exception;
 
 class UserService
@@ -70,11 +71,45 @@ class UserService
      */
     public function verifyToken($email, $token)
     {
-        // return PasswordReset::where('token', $token)->where('email', $email)->firstOrFail();
+        return PasswordReset::where('token', $token)->where('email', $email)->firstOrFail();
     }
 
     /**
-     * Get Password Reset for specified email and toke.
+     * re-verify for specified email and token.
+     *
+     *@param  [string] email
+     *@param  [string] token
+     *
+     *@return [json]   object
+     */
+    public function emailVerifyToken($email, $token)
+    {
+        return User::where('email_verification_token', $token)->where('email', $email)->firstOrFail();
+    }
+
+    /**
+     *  Get Email verified for specified email and token.
+     *
+     *@param  [string] email
+     *@param  [string] token
+     *
+     *@return [json]   object
+     */
+    public function setEmailVerified($user)
+    {
+        try {
+            $user->email_verification_token = '';
+            $user->email_verified = 'yes';
+            $user->save();
+            
+            return $user;
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    /**
+     * Get Password Reset for specified email and token.
      *
      *@param  [array] verified credentials
      *@param  [object] user details
@@ -86,7 +121,7 @@ class UserService
         try {
             $user->password = $credentials['password'];
             $user->save();
-
+            
             return $user;
         } catch (\Exception $ex) {
             throw $ex;

@@ -9,6 +9,7 @@ use App\Http\Resources\Frontend\UserResource;
 use App\Http\Requests\Frontend\UserRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use DB;
+use App\Events\UsersEmailVerification;
 
 class UserController extends Controller
 {
@@ -27,7 +28,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->UserService->index($request);
+        $users = $this->UserService->index();
         return UserResource::collection($users);
     }
 
@@ -43,6 +44,7 @@ class UserController extends Controller
         DB::beginTransaction();
         try {
             $user = $this->UserService->store($validatedUser);
+            event(new UsersEmailVerification($user));
             DB::commit();
             return response()->json(['message' => 'User Created'], 201);
         } catch (\Exception $ex) {

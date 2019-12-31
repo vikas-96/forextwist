@@ -9,10 +9,12 @@ use App\Http\Requests\Frontend\LoginRequest;
 use App\Http\Requests\Frontend\ForgetPasswordRequest;
 use App\Http\Requests\Frontend\ResetPasswordRequest;
 use App\Http\Requests\Frontend\ChangePasswordRequest;
+use App\Http\Requests\Frontend\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Carbon\Carbon;
 use App\Events\UsersResetPassword;
+use App\Events\UsersResetPasswordSuccess;
 
 class AuthController extends Controller
 {
@@ -137,9 +139,9 @@ class AuthController extends Controller
             $userDetails = $this->UserService->getByEmail($credentials['email']);
 
             $user = $this->UserService->setPasswordAndStatus($credentials, $userDetails);
-
-            if ($user->status == 1) {
-                // event(new UsersResetPasswordSuccess($user));
+            
+            if ($user->status == "active") {
+                event(new UsersResetPasswordSuccess($user));
 
                 return response()->json([
                     'message' => 'Password has been changed successfully.',
@@ -183,6 +185,34 @@ class AuthController extends Controller
             ], 200);
         } catch (\Exception $ex) {
             return response()->json(['message' => $ex->getMessage()]);
+        }
+    }
+
+    /**
+     * email verification.
+     *
+     * @param  [string] email
+     * @param  [string] token
+     * @param  [string] password
+     * @param  [string] password_confirmation
+     *
+     * @return [json] object
+     */
+    public function emailVerification(EmailVerificationRequest $request)
+    {
+        $credentials = $request->validated();
+
+        try {
+            $userDetails = $this->UserService->emailVerifyToken($credentials['email'], $credentials['token']);
+
+            $user = $this->UserService->setEmailVerified($userDetails);
+            return response()->json(['message' => 'Email has been verified successfully.'], 200);
+        } catch (ModelNotFoundException $ex) {
+            return response()->json([
+                'message' => 'The Email Verification Link is Invalid.',
+            ], 404);
+        } catch (\Exception $ex) {
+            return response()->json(['message' => $ex->getMessage()], 500);
         }
     }
 

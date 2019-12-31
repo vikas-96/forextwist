@@ -9,15 +9,14 @@
                     <table cellpadding="0" cellspacing="0" border="0" width="660">
                         <tr>
                             <td valign="top">
-                                <h4 style="font-size:16px; font-family: Arial; margin:0; color: #3C56A1;">Dear {{ $user->first_name }},</h4>
+                                <h4 style="font-size:16px; font-family: Arial; margin:0; color: #3C56A1;">Dear {{ $user->firstname }},</h4>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <p
-                                    style="font-size: 14px; font-family: Arial; margin: 0; padding-bottom: 10px;">
-                                    You are receiving this email because we have received a password reset
-                                    request for your account.
+                                    style="font-size: 15px; font-family: Arial; margin: 0; padding-bottom: 10px;">
+                                    Thank You for registering Forex Twist.
                                 </p>
                             </td>
                         </tr>
@@ -25,8 +24,7 @@
                             <td valign="top">
                                 <p
                                     style="font-size: 14px; font-family: Arial; margin: 0; padding-bottom: 22px;">
-                                    Kindly click the below mentioned “Reset Password” link and follow the
-                                    instructions.</p>
+                                    Kindly click the below mentioned “Verify Email” to get your email verified.</p>
                             </td>
                         </tr>
                         <tr>
@@ -35,7 +33,7 @@
                         <tr>
                             <td valign="top" style="text-align: center; padding-bottom: 22px;">
                                 <a href="{{$action_url}}" target="_blank;"
-                                    style="font-family: Arial; text-transform: uppercase; background: #3C56A1; padding: 10px 80px; border-radius:5px; text-decoration: none; color: white;">Reset Password</a>
+                                    style="font-family: Arial; text-transform: uppercase; background: #3C56A1; padding: 10px 80px; border-radius:5px; text-decoration: none; color: white;">Verify Email</a>
                             </td>
                         </tr>
                         <tr>
@@ -44,28 +42,6 @@
                         <tr>
                             <td valign="top">
                                 <table cellspacing="0" cellpadding="0" width="100%" border="0">
-                                    <tr>
-                                        <td valign="top" width="20">
-                                            <span
-                                                style="font-size: 28px; line-height: 16px; color:#3C56A1;">&bull;</span>
-                                        </td>
-                                        <td valign="top" width="640">
-                                            <p
-                                                style="font-size: 14px; font-family: Arial; margin: 0; padding-bottom: 15px; display: inline-block; vertical-align: top;">
-                                                This password reset link will expire at {{$expire_at}}.</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td valign="top" width="20">
-                                            <span
-                                                style="font-size: 28px; line-height: 16px; color:#3C56A1;">&bull;</span>
-                                        </td>
-                                        <td valign="top" width="640">
-                                            <p
-                                                style="font-size: 14px; font-family: Arial; margin: 0; padding-bottom: 15px; display: inline-block; vertical-align: top;">
-                                                If you did not request a password reset, no further action is required.</p>
-                                        </td>
-                                    </tr>
                                     <tr>
                                         <td valign="top" width="20">
                                             <span
@@ -124,7 +100,7 @@
                             <td>
                                 <p
                                     style="font-family: Arial; font-size:12px; color: #666666; padding-bottom:10px;">
-                                    If you’re having trouble clicking the "Reset Password" button, copy and
+                                    If you’re having trouble clicking the "Verify Email" button, copy and
                                     paste
                                     the
                                     URL below into your web browser:{{$action_url}}</p>
