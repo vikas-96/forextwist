@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
             $table->longText('address')->nullable();
             $table->string('email_verified')->default('no')->nullable();
             $table->string('status')->default('active');
-            $table->integer('deleted_at')->nullable();
+            $table->softDeletes();
             $table->string('email_verification_token')->nullable();
             $table->timestamps();
         });

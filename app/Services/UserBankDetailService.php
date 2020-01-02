@@ -41,7 +41,7 @@ class UserBankDetailService
     }
 
     public function userBankDetails($userId){
-        return UserBankDetail::where('user_id',$userId)->get();
+        return UserBankDetail::where('user_id',$userId)->where('status','active')->get();
     }
 
 }

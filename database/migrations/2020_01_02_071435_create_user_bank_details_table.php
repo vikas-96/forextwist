@@ -25,6 +25,7 @@ class CreateUserBankDetailsTable extends Migration
             $table->integer('country');
             $table->integer('state');
             $table->string('city');
+            $table->string('status',10)->default('active');
             $table->timestamps();
         });
     }

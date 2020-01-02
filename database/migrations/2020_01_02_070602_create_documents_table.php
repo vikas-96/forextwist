@@ -20,6 +20,7 @@ class CreateDocumentsTable extends Migration
             $table->string('name');
             $table->string('path');
             $table->string('status')->default('pending');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

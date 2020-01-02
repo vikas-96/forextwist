@@ -24,8 +24,10 @@ class UserRequest extends FormRequest
     public function rules()
     {
         $emailValidation = 'required|email|unique:users,email';
+        $status = "sometimes|required";
         if ($this->method() == 'PUT' || $this->method() == 'PATCH') {
             $emailValidation = 'required|email|unique:users,email,' . $this->user . ',id';
+            $status = "sometimes|required|in:active,inactive";
         }
         return [
             'firstname' => 'required|regex:/^[a-z\d\.-_\s]+$/i',
@@ -39,7 +41,7 @@ class UserRequest extends FormRequest
             'city' => 'sometimes|required',
             'pincode' => 'sometimes|required|min:5',
             'address' => 'sometimes|required',
-            'status' => 'sometimes|required'
+            'status' => $status
         ];
     }
 }
