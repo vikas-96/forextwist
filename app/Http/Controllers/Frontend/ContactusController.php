@@ -47,7 +47,7 @@ class ContactusController extends Controller
         $validated = $request->validated();
         DB::beginTransaction();
         try {
-            $patient = $this->ContactusService->store($validated);
+            $data = $this->ContactusService->store($validated);
             DB::commit();
             return response()->json(['message' => 'Contact Us Created'], 201);
         } catch (\Exception $ex) {

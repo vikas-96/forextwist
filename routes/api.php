@@ -35,6 +35,9 @@ Route::namespace('Frontend')->group(function () {
     });
 });
 
-// Route::namespace('Admin')->prefix('admin/v1')->group(function () {
-    
-// }
+Route::namespace('User')->prefix('user')->group(function () {
+    Route::group(['middleware' => 'auth:api'], function () {
+        Route::apiResource('user_bank_detail',"UserBankDetailController");
+        Route::get('bank_detail_of_user/{id}',"UserBankDetailController@userBankDetails")->name('bank_detail_of_user');
+    });
+});
