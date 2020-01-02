@@ -27,7 +27,7 @@ class UserBankDetailRequest extends FormRequest
         $status = "sometimes|required";
         if ($this->method() == 'PUT' || $this->method() == 'PATCH') {
             $accountValidation = 'required|numeric|digits_between:8,17|unique:user_bank_details,account_number,' . $this->user_bank_detail . ',id';
-            $status = "required|in:active,inactive";
+            $status = "sometimes|required|in:active,inactive";
         }
 
         return [

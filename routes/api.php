@@ -39,5 +39,8 @@ Route::namespace('User')->prefix('user')->group(function () {
     Route::group(['middleware' => 'auth:api'], function () {
         Route::apiResource('user_bank_detail',"UserBankDetailController");
         Route::get('bank_detail_of_user/{id}',"UserBankDetailController@userBankDetails")->name('bank_detail_of_user');
+        Route::apiResource('document',"DocumentController");
+        Route::post('document_upload',"DocumentController@uploadFile")->name('document_upload');
+        Route::get('document_of_user/{id}',"DocumentController@userDocument")->name('document_of_user');
     });
 });

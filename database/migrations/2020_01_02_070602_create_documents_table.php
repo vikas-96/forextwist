@@ -16,7 +16,6 @@ class CreateDocumentsTable extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id');
-            $table->string('type');
             $table->string('name');
             $table->string('path');
             $table->string('status')->default('pending');
