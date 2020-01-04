@@ -41,6 +41,9 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $validatedUser = $request->validated();
+
+        $accountNo = $this->UserService->makeAccountNumber();
+        $validatedUser['account_no'] = $accountNo;
         DB::beginTransaction();
         try {
             $user = $this->UserService->store($validatedUser);

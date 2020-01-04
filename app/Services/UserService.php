@@ -24,6 +24,17 @@ class UserService
         }
     }
 
+    public function makeAccountNumber(){
+        $lastId = User::orderBy('created_at', 'desc')->first('id');
+        if(empty($lastId)){
+            return 'FT00000001';
+        }
+        $numberofdigits = strlen((string) $lastId->id);
+        $append_no = $lastId->id + 1;
+        $numofZero = str_repeat("0", 8 - $numberofdigits);
+        return "FT".$numofZero.$append_no;
+    }
+
     public function show($id)
     {
         $userdata = User::find($id);
