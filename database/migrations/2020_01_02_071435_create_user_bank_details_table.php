@@ -15,17 +15,17 @@ class CreateUserBankDetailsTable extends Migration
     {
         Schema::create('user_bank_details', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
+            $table->integer('user_id');                         // relation with user table
             $table->string('nick_name');
-            $table->integer('bank_name');
-            $table->string('account_name');
+            $table->integer('bank_name');                       // relation with bank table
+            $table->string('account_holder_name');
             $table->integer('account_number');
             $table->string('ifsc_code');
             $table->string('branch_name');
-            $table->integer('country');
-            $table->integer('state');
+            $table->integer('country');                         // relation with country table
+            $table->integer('state');                           // relation with state table
             $table->string('city');
-            $table->string('status',10)->default('active');
+            $table->string('status',10)->default('active');     // active or inactive
             $table->timestamps();
         });
     }

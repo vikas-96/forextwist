@@ -15,11 +15,11 @@ class CreateDocumentsTable extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
+            $table->integer('user_id');                     // relation with user table
             $table->string('name');
             $table->string('path');
-            $table->string('status')->default('pending');
-            $table->softDeletes();
+            $table->string('status')->default('pending');   // pending or approved
+            $table->softDeletes();                          // if deleted
             $table->timestamps();
         });
     }

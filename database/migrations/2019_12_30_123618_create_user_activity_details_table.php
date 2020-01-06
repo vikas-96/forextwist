@@ -15,8 +15,8 @@ class CreateUserActivityDetailsTable extends Migration
     {
         Schema::create('user_activity_details', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
-            $table->string('type');   // login or deposit or withdrawal
+            $table->integer('user_id');         // relation with user table
+            $table->string('type');             // login or deposit or withdrawal
             $table->string('ip_address');
             $table->string('comment');
             $table->timestamps();

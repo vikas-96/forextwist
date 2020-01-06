@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Carbon\Carbon;
 use App\Events\UsersResetPassword;
 use App\Events\UsersResetPasswordSuccess;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {

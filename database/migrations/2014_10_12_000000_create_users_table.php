@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('account_no',20)->unique();
+            $table->string('account_no',20)->unique();                  // unique number -> FT00000001
             $table->string('firstname',30);
             $table->string('lastname',30);
             $table->string('email')->unique();
@@ -23,14 +23,14 @@ class CreateUsersTable extends Migration
             $table->string('contact',20);
 
             $table->date('dob')->nullable();
-            $table->integer('country')->nullable();
-            $table->integer('state')->nullable();
+            $table->integer('country')->nullable();                     // relation with country
+            $table->integer('state')->nullable();                       // relation with state
             $table->string('city')->nullable();
             $table->string('pincode',8)->nullable();
             $table->longText('address')->nullable();
-            $table->string('email_verified')->default('no')->nullable();
-            $table->string('status')->default('active');
-            $table->softDeletes();
+            $table->string('email_verified')->default('no')->nullable();// yes or no
+            $table->string('status')->default('active');                // active or inactive
+            $table->softDeletes();                                      // if deleted
             $table->string('email_verification_token')->nullable();
             $table->timestamps();
         });

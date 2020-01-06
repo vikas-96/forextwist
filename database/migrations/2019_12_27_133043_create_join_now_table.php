@@ -17,7 +17,7 @@ class CreateJoinNowTable extends Migration
             $table->bigIncrements('id');
             $table->string('name', 50);
             $table->string('email', 50);
-            $table->tinyInteger('country');
+            $table->integer('country');         // relation with country table
             $table->string('contact', 20);
             $table->softDeletes();
             $table->timestamps();
